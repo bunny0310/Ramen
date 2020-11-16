@@ -1,0 +1,36 @@
+<mat-toolbar class = "nav text_white">
+        <mat-toolbar-row>
+          <button mat-icon-button>
+              <mat-icon>menu</mat-icon>
+          </button>
+          <a mat-button [routerLink]="'/'"> Ramen </a>
+          <span class="flexExpand"></span>
+          <div>
+            <a mat-button *ngIf = "!auth.loggedIn()" [routerLink]="'/create-contact'"> Create an account </a>
+            <a *ngIf = "auth.loggedIn()" mat-button [routerLink]="'/templates'"> Prepare </a>
+            <a *ngIf = "auth.loggedIn()" mat-button [routerLink]="'/outreach'"> Send </a>
+            <a mat-button [routerLink]="'/accounts'"> Why Ramen? </a>
+            <a mat-button [routerLink]="'/create-account'"> Contact Us </a>
+            <a mat-button [routerLink]="'/contacts'"> Meet us </a>
+          </div>
+          <span class="flexExpand2"></span>
+          <span class = "right-text" *ngIf = "obj === null">You're not logged in!</span>
+
+          <div *ngIf = "obj !== null">
+            <span class = "right-text">Welcome {{obj.user.firstName}}</span>
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon>create</mat-icon>
+                <span>Edit Profile</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>login</mat-icon>
+                <span (click) = "logout()">Logout</span>
+              </button>
+            </mat-menu>            
+          </div>
+        </mat-toolbar-row>
+        </mat-toolbar>

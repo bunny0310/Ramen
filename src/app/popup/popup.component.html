@@ -1,0 +1,12 @@
+        <form [formGroup]="templateForm" (ngSubmit)="onSubmit()">
+        <mat-form-field class = "full-form-field">
+            <mat-label>Alias: </mat-label>
+            <input matInput id = "alias"
+            type="text" formControlName="alias" required>
+        </mat-form-field>
+        <mat-form-field class = "full-form-field">
+                <mat-label>Template: </mat-label>
+                <textarea matInput formControlName="template"></textarea>
+        </mat-form-field>
+        <button mat-button [disabled] = "!templateForm.valid" color="primary" type = "submit">Add Template</button>                  
+        </form>
