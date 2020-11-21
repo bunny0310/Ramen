@@ -136,6 +136,18 @@ export class ProfessionalsComponent implements OnInit {
       this.snackBar.open('Please select at least one professional', '', {
         duration: 2000
       });
+      return;
+    }
+
+    const inserted = this.apiService.insertSavedProfessionals(this.savedProfessionals);
+    if (inserted === 1) {
+      this.snackBar.open('Records inserted successfully ' + inserted, '', {
+        duration: 2000
+      });
+    } else {
+      this.snackBar.open('Internal service error. ' + inserted, '', {
+        duration: 2000
+      });
     }
   }
 

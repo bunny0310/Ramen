@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { Subject } from 'rxjs';
+import { Subject, throwError } from 'rxjs';
 import { AuthService } from './auth';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -122,5 +123,26 @@ export class APIService {
   public getSavedProfessionalsUpdateListener() {
     return this.savedProfessionalsUpdated.asObservable();
   }
+
+  public insertSavedProfessionals(savedProfessionals) {
+    this.http.post('http://35.231.217.58:8080/api/v1/savedProfessionals/insert', savedProfessionals,
+    {observe: 'response', responseType: 'text'})
+    .pipe(
+      catchError(this.handleError.bind(this))
+    )
+    .subscribe((response) => {
+    });
+    return 1;
+  }
+
+
+private handleError(error: HttpErrorResponse) {
+
+    // The backend returned an unsuccessful response code.
+    // The response body may contain clues as to what went wrong.
+  // Return an observable with a user-facing error message.
+  console.log(error);
+  return throwError('Error!');
+}
 }
 
