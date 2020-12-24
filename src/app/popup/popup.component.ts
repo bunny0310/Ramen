@@ -28,7 +28,7 @@ export class PopupComponent implements OnInit {
   }
 
   onSubmit() {
-    const userObj = localStorage.getItem('user');
+    const userObj = localStorage.getItem('user-ramen');
     if (userObj === null) {
       this.dialogRef.close(false);
       return;
@@ -39,7 +39,7 @@ export class PopupComponent implements OnInit {
       template: this.templateForm.get('template').value
     };
     console.log(formData);
-    this.httpClient.post('http://35.231.17.134:8080/api/v1/templates/insert', formData, {observe: 'response', responseType: 'text'})
+    this.httpClient.post('http://ramen-templates-service.herokuapp.com/api/v1/templates/insert', formData, {observe: 'response', responseType: 'text'})
     .pipe(
       catchError(this.handleError.bind(this))
     )

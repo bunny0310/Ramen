@@ -27,7 +27,7 @@ export class APIService {
   savedProfessionalsUpdated = new Subject<{data: []}>();
 
   public getProfessionals() {
-    this.http.get<[]>('http://35.229.84.111:8080/api/v1/professionals')
+    this.http.get<[]>('http://ramen-professionals-service.herokuapp.com/api/v1/professionals')
       .subscribe((res: any) => {
         this.professionals = res;
         this.professionalsUpdated.next({data: res});
@@ -39,7 +39,7 @@ export class APIService {
   }
 
   public getDistinctCompanies() {
-    this.http.get<[]>('http://35.229.84.111:8080/api/v1/professionals/companies')
+    this.http.get<[]>('http://ramen-professionals-service.herokuapp.com/api/v1/professionals/companies')
       .subscribe((res: any) => {
         this.distinctCompanies = res;
         this.companiesUpdated.next({data: res});
@@ -51,7 +51,7 @@ export class APIService {
   }
 
   public getDistinctJobTitles() {
-    this.http.get<[]>('http://35.229.84.111:8080/api/v1/professionals/jobTitles')
+    this.http.get<[]>('http://ramen-professionals-service.herokuapp.com/api/v1/professionals/jobTitles')
       .subscribe((res: any) => {
         this.distinctJobTitles = res;
         this.jobTitlesUpdated.next({data: res});
@@ -66,7 +66,7 @@ export class APIService {
     if (name === '') {
       return;
     }
-    this.http.get<[]>('http://35.229.84.111:8080/api/v1/professionals/companies/' + name)
+    this.http.get<[]>('http://ramen-professionals-service.herokuapp.com/api/v1/professionals/companies/' + name)
       .subscribe((res: any) => {
         this.professionals = res;
         this.companyProfsUpdated.next({data: res});
@@ -81,7 +81,7 @@ export class APIService {
     if (name === '') {
       return;
     }
-    this.http.get<[]>('http://35.229.84.111:8080/api/v1/professionals/jobTitles/' + name)
+    this.http.get<[]>('http://ramen-professionals-service.herokuapp.com/api/v1/professionals/jobTitles/' + name)
       .subscribe((res: any) => {
         this.professionals = res;
         this.jobTitleProfsUpdated.next({data: res});
@@ -93,11 +93,11 @@ export class APIService {
   }
 
   public getUserTemplates() {
-    const userObj: any = JSON.parse(this.authService.getUserData());
+    const userObj: any = this.authService.getUserData();
     if (userObj === null) {
       return;
     }
-    this.http.get<[]>('http://35.231.17.134:8080/api/v1/templates/list/' + userObj.user.id)
+    this.http.get<[]>('http://ramen-templates-service.herokuapp.com/api/v1/templates/list/' + userObj.user.id)
       .subscribe((res: any) => {
         this.templates = res;
         this.templatesUpdated.next({data: res});
@@ -109,11 +109,11 @@ export class APIService {
   }
 
   public getSavedProfessionals() {
-    const userObj: any = JSON.parse(this.authService.getUserData());
+    const userObj: any = this.authService.getUserData();
     if (userObj === null) {
       return;
     }
-    this.http.get<[]>('http://35.231.217.58:8080/api/v1/savedProfessionals/list/' + userObj.user.id)
+    this.http.get<[]>('http://ramen-saved-profs-service.herokuapp.com/api/v1/savedProfessionals/list/' + userObj.user.id)
       .subscribe((res: any) => {
         this.savedProfessionals = res;
         this.savedProfessionalsUpdated.next({data: res});
@@ -125,7 +125,7 @@ export class APIService {
   }
 
   public insertSavedProfessionals(savedProfessionals) {
-    this.http.post('http://35.231.217.58:8080/api/v1/savedProfessionals/insert', savedProfessionals,
+    this.http.post('http://ramen-saved-profs-service.herokuapp.com/api/v1/savedProfessionals/insert', savedProfessionals,
     {observe: 'response', responseType: 'text'})
     .pipe(
       catchError(this.handleError.bind(this))

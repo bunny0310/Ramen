@@ -12,16 +12,16 @@ export class AuthService {
   constructor(private httpClient: HttpClient, private router: Router) { }
 
   public getUserData() {
-      return localStorage.getItem('user');
+      return JSON.parse(localStorage.getItem('user-ramen'));
   }
 
   public isAuthenticated() {
-      const obj = localStorage.getItem('user') === null ? null : JSON.parse(localStorage.getItem('user'));
+      const obj = localStorage.getItem('user') === null ? null : JSON.parse(localStorage.getItem('user-ramen'));
       if (obj == null) {
           this.router.navigate(['login']);
           return false;
       }
-      this.httpClient.get<{success: number}>('http://35.185.118.209:8080/api/v1/auth/isAuthorized/' + obj.hash)
+      this.httpClient.get<{success: number}>('http://ramen-authorization-service.herokuapp.com/api/v1/auth/isAuthorized/' + obj.hash)
       .subscribe((response) => {
         console.log(response);
         if (response.success === 1) {
@@ -34,6 +34,6 @@ export class AuthService {
   }
 
   public loggedIn() {
-      return localStorage.getItem('user') !== null;
+      return localStorage.getItem('user-ramen') !== null;
   }
 }

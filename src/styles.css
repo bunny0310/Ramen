@@ -82,3 +82,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         min-height: 25px;
       }    
   }
+
+  table {
+      width: 100%;
+  }

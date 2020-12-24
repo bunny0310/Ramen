@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { APIService } from '../services/api';
 
 @Component({
-  selector: 'app-outreach',
-  templateUrl: './outreach.component.html',
-  styleUrls: ['./outreach.component.css']
+  selector: 'app-tracking',
+  templateUrl: './tracking.component.html',
+  styleUrls: ['./tracking.component.css']
 })
-export class OutreachComponent implements OnInit {
+export class TrackingComponent implements OnInit {
 
   savedProfessionals: [] = [];
   columnsToDisplay = ['professionalCompany', 'professionalName', 'professionalJobTitle',
-  'updatedAt', 'count', 'template'];
+  'updatedAt', 'count', 'template', 'nextEmail'];
   value = '';
   templates: [] = [];
   constructor(private apiService: APIService) { }

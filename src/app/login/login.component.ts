@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.get('password').value
     };
 
-    this.httpClient.post('http://35.185.118.209:8080/api/v1/auth/login', formData, {observe: 'response'})
+    this.httpClient.post('http://ramen-authorization-service.herokuapp.com/api/v1/auth/login', formData, {observe: 'response'})
     .pipe(
       catchError(this.handleError.bind(this))
     )
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
         user: JSON.parse(response.body.user),
         hash: response.body.hash
       };
-      localStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem('user-ramen', JSON.stringify(userData));
       this.router.navigate(['/']);
     });
   }

@@ -33,14 +33,14 @@ export class ProfessionalsComponent implements OnInit {
   constructor(private apiService: APIService, private authService: AuthService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-
     // initalize userobj
-    this.userObj = JSON.parse(this.authService.getUserData());
+    this.userObj = this.authService.getUserData();
 
     // initialize professionals
     this.apiService.getProfessionals();
     this.apiService.getProfessionalsUpdateListener()
     .subscribe((res) => {
+      console.log('res');
       this.professionals = (res.data);
     });
 

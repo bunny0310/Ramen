@@ -20,14 +20,14 @@ export class NavBarComponent implements OnInit {
     if (!this.auth.isAuthenticated()) {
       this.router.navigate(['/login']);
     }
-    this.obj = localStorage.getItem('user') === null ? null : JSON.parse(localStorage.getItem('user'));
+    this.obj = localStorage.getItem('user-ramen') === null ? null : JSON.parse(localStorage.getItem('user-ramen'));
     if (this.obj === null) {
       this.router.navigate(['/login']);
     }
   }
 
   logout() {
-    localStorage.removeItem('user');
+    localStorage.removeItem('user-ramen');
     this.router.navigate(['/login']);
   }
 

@@ -21,6 +21,7 @@ import { TemplatesComponent } from './templates/templates.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { PopupComponent } from './popup/popup.component';
 import { OutreachComponent } from './outreach/outreach.component';
+import { TrackingComponent } from './tracking/tracking.component';
 
 
 @NgModule({
@@ -34,13 +35,15 @@ import { OutreachComponent } from './outreach/outreach.component';
     ChipInputAutocompleteComponent,
     TemplatesComponent,
     PopupComponent,
-    OutreachComponent
+    OutreachComponent,
+    TrackingComponent
   ],
   entryComponents: [
     PopupComponent
   ],
   imports: [
     BrowserModule,
+    MatSelectModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatInputModule,

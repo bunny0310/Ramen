@@ -9,15 +9,16 @@
             <a mat-button *ngIf = "!auth.loggedIn()" [routerLink]="'/create-contact'"> Create an account </a>
             <a *ngIf = "auth.loggedIn()" mat-button [routerLink]="'/templates'"> Prepare </a>
             <a *ngIf = "auth.loggedIn()" mat-button [routerLink]="'/outreach'"> Send </a>
+            <a *ngIf = "auth.loggedIn()" mat-button [routerLink]="'/tracking'"> Tracking </a>
             <a mat-button [routerLink]="'/accounts'"> Why Ramen? </a>
             <a mat-button [routerLink]="'/create-account'"> Contact Us </a>
             <a mat-button [routerLink]="'/contacts'"> Meet us </a>
           </div>
           <span class="flexExpand2"></span>
-          <span class = "right-text" *ngIf = "obj === null">You're not logged in!</span>
+          <span class = "right-text" *ngIf = "!auth.loggedIn()">You're not logged in!</span>
 
-          <div *ngIf = "obj !== null">
-            <span class = "right-text">Welcome {{obj.user.firstName}}</span>
+          <div *ngIf = "auth.loggedIn()">
+            <span class = "right-text">Welcome {{auth.getUserData().user.firstName}}</span>
             <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
               <mat-icon>more_vert</mat-icon>
             </button>
