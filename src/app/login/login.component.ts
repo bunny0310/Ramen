@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.get('password').value
     };
 
-    this.httpClient.post('http://ramen-authorization-service.herokuapp.com/api/v1/auth/login', formData, {observe: 'response'})
+    this.httpClient.post('https://ramen-authorization-service.herokuapp.com/api/v1/auth/login', formData, {observe: 'response'})
     .pipe(
       catchError(this.handleError.bind(this))
     )

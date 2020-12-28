@@ -21,7 +21,7 @@ export class AuthService {
           this.router.navigate(['login']);
           return false;
       }
-      this.httpClient.get<{success: number}>('http://ramen-authorization-service.herokuapp.com/api/v1/auth/isAuthorized/' + obj.hash)
+      this.httpClient.get<{success: number}>('https://ramen-authorization-service.herokuapp.com/api/v1/auth/isAuthorized/' + obj.hash)
       .subscribe((response) => {
         console.log(response);
         if (response.success === 1) {
