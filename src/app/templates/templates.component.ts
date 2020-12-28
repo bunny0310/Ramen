@@ -12,14 +12,17 @@ export class TemplatesComponent implements OnInit {
 
   templates: any[] = [];
   columnsToDisplay = ['alias', 'template'];
+  loading = false;
   constructor(private apiService: APIService, public dialog: MatDialog, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
+    this.loading = true;
     this.apiService.getUserTemplates();
     this.apiService.getUserTemplatesUpdateListener()
     .subscribe((res) => {
       this.templates = (res.data);
       console.log(this.templates + 'laurence');
+      this.loading = false;
     });
   }
 

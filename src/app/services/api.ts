@@ -135,6 +135,17 @@ export class APIService {
     return 1;
   }
 
+  public updateSP(data, template, email) {
+    this.http.post('http://ramen-saved-profs-service.herokuapp.com/api/v1/savedProfessionals/update', data,
+    {observe: 'response'})
+    .pipe(
+      catchError(this.handleError.bind(this))
+    )
+    .subscribe((response) => {
+      window.location.href = 'mailto:' + email + '?subject=' + 'Ramen reaching out' + '&body=' + template.template;
+    });
+  }
+
 
 private handleError(error: HttpErrorResponse) {
 

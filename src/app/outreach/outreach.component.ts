@@ -9,13 +9,16 @@ import { APIService } from '../services/api';
 export class OutreachComponent implements OnInit {
 
   savedProfessionals: [] = [];
+  loading = false;
   columnsToDisplay = ['professionalCompany', 'professionalName', 'professionalJobTitle',
-  'updatedAt', 'count', 'template'];
+  'updatedAt', 'count', 'template', 'send'];
   value = '';
-  templates: [] = [];
+  templates: any[] = [];
+  templateMap = new Map();
   constructor(private apiService: APIService) { }
 
   ngOnInit() {
+    this.loading = true;
     this.apiService.getSavedProfessionals();
     this.apiService.getSavedProfessionalsUpdateListener()
     .subscribe((res) => {
@@ -25,7 +28,24 @@ export class OutreachComponent implements OnInit {
     this.apiService.getUserTemplatesUpdateListener()
     .subscribe((res) => {
       this.templates = (res.data);
+      for (const template of this.templates) {
+        this.templateMap.set(template.id, template);
+      }
+      this.loading = false;
     });
+  }
+
+  updateSP(sp) {
+    const id = sp.id;
+    const templateId = this.value;
+    const email = sp.professionalEmail;
+    const data = {
+      id,
+      templateId
+    };
+    this.loading = true;
+    this.apiService.updateSP(data, this.templateMap.get(templateId), email);
+    this.loading = false;
   }
 
 }

@@ -2,6 +2,7 @@
     <div class="header ">
         <app-ribbon [title]="'Login'"></app-ribbon>
         <mat-card class=" center card mat-elevation-z4">
+                <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
             <mat-card-content class="center with-ribbon">
                 <mat-card style="color: white; background-color: #ff6666" *ngIf = "!globalVariablesService.getLoginFormStatus()">Invalid user credentials, please try again!</mat-card>
                 <br>

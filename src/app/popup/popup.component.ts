@@ -39,7 +39,8 @@ export class PopupComponent implements OnInit {
       template: this.templateForm.get('template').value
     };
     console.log(formData);
-    this.httpClient.post('http://ramen-templates-service.herokuapp.com/api/v1/templates/insert', formData, {observe: 'response', responseType: 'text'})
+    this.httpClient.post('http://ramen-templates-service.herokuapp.com/api/v1/templates/insert', formData, 
+    {observe: 'response', responseType: 'text'})
     .pipe(
       catchError(this.handleError.bind(this))
     )

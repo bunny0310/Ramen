@@ -16,6 +16,7 @@ export class ProfessionalsComponent implements OnInit {
   professionals: any[] = [];
   listCompanies: any[] = [];
   listJobTitles: any[] = [];
+  loading = false;
   savedProfessionals: any[] = [];
   count = 0;
   columnsToDisplay = ['company', 'jobTitle', 'firstName', 'lastName', 'workEmail', 'selected'];
@@ -37,11 +38,13 @@ export class ProfessionalsComponent implements OnInit {
     this.userObj = this.authService.getUserData();
 
     // initialize professionals
+    this.loading = true;
     this.apiService.getProfessionals();
     this.apiService.getProfessionalsUpdateListener()
     .subscribe((res) => {
       console.log('res');
       this.professionals = (res.data);
+      this.loading = false;
     });
 
     // initialize distinct companies

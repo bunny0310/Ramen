@@ -2,6 +2,7 @@
     <div class="header ">
         <app-ribbon [title]="'Prepare'"></app-ribbon>
         <mat-card class=" center card mat-elevation-z4">
+                <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
             <mat-card-content class="center with-ribbon" style="overflow-x:auto; width:100%;">
 
                 <button mat-icon-button style="float: right" (click) = "openDialog()">

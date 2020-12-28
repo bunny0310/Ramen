@@ -12,10 +12,13 @@ export class TrackingComponent implements OnInit {
   columnsToDisplay = ['professionalCompany', 'professionalName', 'professionalJobTitle',
   'updatedAt', 'count', 'template', 'nextEmail'];
   value = '';
-  templates: [] = [];
+  templates: any[] = [];
+  templateMap = new Map();
+  loading = false;
   constructor(private apiService: APIService) { }
 
   ngOnInit() {
+    this.loading = true;
     this.apiService.getSavedProfessionals();
     this.apiService.getSavedProfessionalsUpdateListener()
     .subscribe((res) => {
@@ -25,7 +28,15 @@ export class TrackingComponent implements OnInit {
     this.apiService.getUserTemplatesUpdateListener()
     .subscribe((res) => {
       this.templates = (res.data);
+      for (const template of this.templates) {
+        this.templateMap.set(template.id, template);
+      }
+      this.loading = false;
     });
+  }
+
+  public getTemplate(tid) {
+    return this.templateMap.has(tid) ? this.templateMap.get(tid) : null;
   }
 
 }
