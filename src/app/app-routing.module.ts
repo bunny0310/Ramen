@@ -13,7 +13,7 @@ import { ProfessionalsComponent } from './professionals/professionals.component'
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: '', component: ProfessionalsComponent, canActivate: [AuthGuardService]},
+  {path: '', component: HomeComponent, canActivate: [AuthGuardService]},
   {path: 'templates', component: TemplatesComponent, canActivate: [AuthGuardService]},
   {path: 'outreach', component: OutreachComponent, canActivate: [AuthGuardService]},
   {path: 'tracking', component: TrackingComponent, canActivate: [AuthGuardService]}
