@@ -4,6 +4,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Subject, throwError } from 'rxjs';
 import { AuthService } from './auth';
 import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class APIService {
   savedProfessionals: [] = [];
 
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  constructor(private http: HttpClient, private authService: AuthService, private router: Router) { }
   professionalsUpdated = new Subject<{data: []}>();
   companiesUpdated = new Subject<{data: []}>();
   jobTitlesUpdated = new Subject<{data: []}>();
@@ -152,6 +153,9 @@ private handleError(error: HttpErrorResponse) {
     // The backend returned an unsuccessful response code.
     // The response body may contain clues as to what went wrong.
   // Return an observable with a user-facing error message.
+  if (error.status === 401) {
+    this.router.navigate(['/login']);
+  }
   console.log(error);
   return throwError('Error!');
 }

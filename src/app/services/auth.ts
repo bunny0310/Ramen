@@ -16,20 +16,11 @@ export class AuthService {
   }
 
   public isAuthenticated() {
-      const obj = localStorage.getItem('user') === null ? null : JSON.parse(localStorage.getItem('user-ramen'));
+      const obj = localStorage.getItem('user-ramen') === null ? null : JSON.parse(localStorage.getItem('user-ramen'));
       if (obj == null) {
           this.router.navigate(['login']);
           return false;
       }
-      this.httpClient.get<{success: number}>('https://ramen-authorization-service.herokuapp.com/api/v1/auth/isAuthorized/' + obj.hash)
-      .subscribe((response) => {
-        console.log(response);
-        if (response.success === 1) {
-            console.log('inside if');
-            return true;
-        }
-        return false;
-      });
       return true;
   }
 
